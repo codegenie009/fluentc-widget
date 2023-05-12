@@ -30,9 +30,47 @@ var _utils = require("./utils.js");
 var _query = require("./query.js");
 var _request = _interopRequireDefault(require("./request.js"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-function fluentcWidget(options) {
-  console.log('options', options);
-}
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
+function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
+var getDefaults = function getDefaults() {
+  return {
+    apiPath: 'https://api.fluentc.io/graphql',
+    apiKey: 'da2-wtkl5bpofjbu5ex5iugu4o2mbm'
+  };
+};
+var logger = {
+  log: function log(txt) {
+    console.log('%c FLUENTC: ' + txt, 'font-size: 18px; color: green');
+  },
+  error: function error(txt) {
+    console.log('%c FLUENTC: ' + txt, 'font-size: 18px; color: red');
+  }
+};
+var fluentcWidget = function () {
+  function fluentcWidget() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    _classCallCheck(this, fluentcWidget);
+    this.init(options);
+  }
+  _createClass(fluentcWidget, [{
+    key: "init",
+    value: function init() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      console.log('options', options);
+      if (!options.widgetID) {
+        logger.error('Invalid widgetID');
+        return;
+      }
+      var defOpt = getDefaults();
+      this.options = (0, _utils.defaults)(options, this.options || {}, defOpt);
+    }
+  }]);
+  return fluentcWidget;
+}();
 var _default = fluentcWidget;
 exports.default = _default;
 module.exports = exports.default;
@@ -187,9 +225,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.defaults = defaults;
-exports.defer = defer;
 exports.hasXMLHttpRequest = hasXMLHttpRequest;
-exports.isMissingOption = isMissingOption;
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 var arr = [];
 var each = arr.forEach;
@@ -206,28 +242,6 @@ function defaults(obj) {
 }
 function hasXMLHttpRequest() {
   return typeof XMLHttpRequest === 'function' || (typeof XMLHttpRequest === "undefined" ? "undefined" : _typeof(XMLHttpRequest)) === 'object';
-}
-function defer() {
-  var res;
-  var rej;
-  var promise = new Promise(function (resolve, reject) {
-    res = resolve;
-    rej = reject;
-  });
-  promise.resolve = res;
-  promise.reject = rej;
-  return promise;
-}
-function isMissingOption(obj, props) {
-  return props.reduce(function (mem, p) {
-    if (mem) return mem;
-    if (!obj || !obj[p] || typeof obj[p] !== 'string' || !obj[p].toLowerCase() === p.toLowerCase()) {
-      var err = "i18n-fluentc :: got \"".concat(obj[p], "\" in options for ").concat(p, " which is invalid.");
-      console.warn(err);
-      return err;
-    }
-    return false;
-  }, false);
 }
 },{}],6:[function(require,module,exports){
 
