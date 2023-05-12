@@ -1,15 +1,15 @@
 
-export interface FluentcWidgetOptions {
+export interface FluentcWidgetInitOptions {
   /**
    * your FluentC widgetId
    */
   widgettId: string;
-  /**
-   * Document ID
-   */
-  fluentcTargetElement: string;
 }
 
-type FluentcWidget = (options: FluentcWidgetOptions) => void
+declare class fluentcWidget {
+  constructor(options?: FluentcWidgetInitOptions);
+  
+  init(options?: FluentcWidgetInitOptions) : void;
+}
 
-export default FluentcWidget;
+export default fluentcWidget;

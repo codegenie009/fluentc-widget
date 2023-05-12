@@ -3,7 +3,7 @@
 /cjs
 /esm
 /dist
-/i18nFluentc.js
-/i18nFluentc.min.js
+/fluentcWidget.js
+/fluentcWidget.min.js
 /example
 /test/deno
