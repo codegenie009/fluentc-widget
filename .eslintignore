@@ -1,0 +1,9 @@
+/build
+/node_modules
+/cjs
+/esm
+/dist
+/i18nFluentc.js
+/i18nFluentc.min.js
+/example
+/test/deno
